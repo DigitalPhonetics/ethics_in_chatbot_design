@@ -1,0 +1,133 @@
+
+# ---------------NEW RULES - IMS Exams MESSAGES-------------------------#
+# --------------Templates for System General Acts-----------------------#
+
+template welcomemsg(): "Hello. I'm the 'IMS Exams' chat bot. What can I do for you?"
+template welcomemsg(help): "I cannot understand you. Tell me again how I can help you."
+template welcomemsg(more): "Do you need anything else?"
+template bad(): "I'm a bit confused. Tell me again how I can help you."
+# repeat(): "Could you repeat that?"
+template closingmsg(): "Goodbye. (Please rate this conversation now)"
+
+#------------------Templates for System Requests------------------------#
+# The only system requestable keyword is "name"
+
+template request(name): "Hello. What can I do for you?"
+
+# --------- Helper Functions -------- #
+
+function plural(name)
+	"{plural_s(name)}"
+
+function cap_name(name)
+	"{cap_name(name)}"
+
+# --------------------Methods for System Informs-------------------------#
+
+#-------------Templates for System Recommendation/Inform---------------#
+
+template inform_byname(name): "What do you want to know about {plural(name)}?"
+	if name = "bachelor thesis": "What do you want to know about bachelor theses?"
+	if name = "master thesis": "What do you want to know you about master theses?"
+	if name = "dontcare": "What do you want to know about examination related matters?"
+
+template inform_byname(name, registration)
+	if registration = "campus": "Your {plural_s(name)} have to be registered on the exam registration website within the official registration period for the respective semester. First, you have to click on the tab 'Registration via Curriculum' and then select the appropriate modules and related courses for which you want to register. However, if you have to register for a repeat {name} which takes place in the same semester, you cannot do this on the exam registration website. In this case, you have to fill out the 'Exam Registration Replacement Form', which is available at the examination office, and hand it to your responsible administrator at the examination office."
+		if name = "requirements module": "Your {name} examination has to be registered on the exam registration website within the official registration period for the respective semester. You have to click on the tab 'Registration via Curriculum' and then select the {name} for which you want to register. Your examination date will be announced on the exam registration website shortly after the registration phase ended."
+	if registration = "exam office": "To register for your {name}, you only have to fill out the form on the exam registration website under the tab 'My Application Forms' and hand it to the examination office."
+
+template inform_byname(name, registration_period_sose)
+	if registration_period_sose = "May 6, 2020 to May 28, 2020": "The preliminary registration period for {plural_s(name)} for the summer semester 2020 is taking place from May 6 to May 28."
+	if registration_period_sose = "independent": "Depending on your examination regulation, your {name} can be registered at any time at the examination office."
+
+template inform_byname(name, registration_period_wise)
+	if registration_period_wise = "November 11, 2020 to December 3, 2020": "The registration period for {plural_s(name)} for the winter semester 2020 was from November 11 to December 3."
+	if registration_period_wise = "independent": "Depending on your examination regulation, your {name} can be registered at any time at the examination office."
+
+template inform_byname(name, registration, registration_period_sose)
+	if registration = "campus"
+		if registration_period_sose = "May 6, 2020 to May 28, 2020": "The preliminary registration period for {plural_s(name)} for the summer semester 2020 is taking place from May 6 to May 28. {plural_s(cap_name(name))} have to be registered on the exam registration website within this time frame."
+	if registration = "exam office"
+		if registration_period_sose = "independent": "Well, depending on your examination regulation, your {name} can be registered at any time at the examination office. Just fill out the form on the exam registration website under the tab 'My Application Forms' and hand it to the examination office."
+
+template inform_byname(name, registration, registration_period_wise)
+	if registration = "campus"
+		if registration_period_wise = "November 11, 2020 to December 3, 2020": "The registration period for {plural_s(name)} for the winter semester 2020 was from November 11 to December 3. {plural_s(cap_name(name))} have to be registered on the exam registration website within this time frame."
+	if registration = "exam office"
+		if registration_period_wise = "independent": "Well, depending on your examination regulation, your {name} can be registered at any time at the examination office. Just fill out the form on the exam registration website under the tab 'My Application Forms' and hand it to the examination office."
+
+template inform_byname(name, acceptance_belated_registration)
+	if acceptance_belated_registration = "no": "You have to pay attention to the deadlines! Belated registrations cannot be accepted by the examination office and just for your information, without an official registration, you are not authorized to take the {name}. Specifically, this means that you can only take the exam in the semester in which it will be offered next time."
+	if acceptance_belated_registration = "independent": "Well, depending on your examination regulation, your {name} registration is likely to be independent of the examination registration period, thus it can be done at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration)
+	if acceptance_belated_registration = "no"
+		if registration = "campus": "You have to pay attention to registration deadlines! Belated {name} registrations won't be accepted by the examination office and just for your information, without an official registration, you are not authorized to take the {name}. Specifically, this means that you can only take the {name} in the semester in which it will be offered next time."
+	if acceptance_belated_registration = "independent"
+		if registration = "exam office": "Well, depending on your examination regulation, your {name} registration is likely to be independent of the examination registration period, thus it can be registered at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration_period_wise)
+    if acceptance_belated_registration = "independent"
+        if registration_period_wise = "independent": "Well, depending on your examination regulation, your {name} registration is likely to be independent of the examination registration period, thus it can be done at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration, registration_period_wise)
+	if acceptance_belated_registration = "no"
+		if registration = "campus"
+			if registration_period_wise = "November 11, 2020 to December 3, 2020": "You have to pay attention to registration deadlines! Belated {name} registrations won't be accepted by the examination office and just for your information, without an official registration, you are not authorized to take the {name}. Specifically, this means that you can only take the {name} in the semester in which it will be offered next time."
+	if acceptance_belated_registration = "independent"
+		if registration = "exam office"
+			if registration_period_wise = "independent": "Well, depending on your examination regulation, your {name} registration is likely to be independent of the examination registration period, thus it can be registered at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration, registration_period_sose)
+	if acceptance_belated_registration = "no"
+		if registration = "campus"
+			if registration_period_sose = "May 6, 2020 to May 28, 2020": "You have to pay attention to registration deadlines! Belated {name} registrations won't be accepted by the examination office and just for your information, without an official registration, you are not authorized to take the {name}. Specifically, this means that you can only take the {name} in the semester in which it will be offered next time."
+	if acceptance_belated_registration = "independent"
+		if registration = "exam office"
+			if registration_period_sose = "independent": "Well, depending on your examination regulation, your {name} registration is likely to independent of the examination registration period, thus it can be registered at any time at the examination office."
+
+template inform_byname(name, registration_withdrawal)
+	if registration_withdrawal = "yes": "Yes, you can withdraw from a registered {name} on the exam registration website, but you have to observe the withdrawal period of 7 days before the exam."
+		if name = "bachelor thesis": "Yes, you can change your bachelor thesis topic, but only once and only within the first 3 months of processing. If you really want to change your thesis topic, you have to discuss further procedures with your thesis supervisor and your responsible administrator at the examination office."
+		if name = "master thesis": "Yes, you can change your master thesis topic, but only once and only within the first 3 months of processing. If you really want to change your thesis topic, you have to discuss further procedures with your thesis supervisor and your responsible administrator at the examination office."
+
+template inform_byname(name, acceptance_missed_withdrawal)
+	if acceptance_missed_withdrawal = "examination board": "Well, in case you did not manage to observe the withdrawal period, your {name} withdrawal has to be approved by the examination board."
+	if acceptance_missed_withdrawal = "n.a.": "I can't tell you what you should do if you have missed to return your {name} topic within the required time frame. Contact your thesis supervisor and your responsible administrator at the examination office to discuss further procedures."
+
+template inform_byname(name, acceptance_missed_withdrawal, registration_withdrawal)
+	if acceptance_missed_withdrawal = "examination board"
+		if registration_withdrawal = "yes": "Well, in case you did not manage to observe the withdrawal period, your {name} withdrawal has to be approved by the examination board."
+	if acceptance_missed_withdrawal = "n.a."
+		if registration_withdrawal = "yes"
+			if name = "bachelor thesis": "I can't tell you what you should do if you have missed to return your {name} topic within the required time frame. Contact your thesis supervisor and your responsible administrator at the examination office to discuss how you should proceed."
+			if name = "master thesis": "I can't tell you what you should do if you have missed to return your {name} topic within the required time frame. Contact your thesis supervisor and your responsible administrator at the examination office to discuss how you should proceed."
+
+template inform_byname(name, acceptance_illness_withdrawal)
+	if acceptance_illness_withdrawal = "yes": "Yes, you can withdraw from {plural_s(name)} in case of illness. However, you have to submit a medical certificate stating your inability to take the exam and the original certificate along with a completed withdrawal form has to be submitted to the examination office no later than 3 days after the examination took place."
+	if acceptance_illness_withdrawal = "n.a.": "I have no information on whether there is a possibility to postpone the submission date of your {name} in the event of illness. Contact your thesis supervisor and your responsible administrator at the examination office to discuss what you're obliged to do in such a case."
+
+template inform_byname(name, acceptance_illness_withdrawal, registration_withdrawal)
+	if acceptance_illness_withdrawal = "yes"
+		if registration_withdrawal = "yes": "Yes, you can withdraw from {plural_s(name)} in case of illness. However, you have to submit a medical certificate stating your inability to take the exam and the original certificate along with a completed withdrawal form has to be submitted to the examination office no later than 3 days after the examination took place."
+	if acceptance_illness_withdrawal = "n.a."
+		if registration_withdrawal = "yes"
+			if name = "bachelor thesis": "I have no information on whether there is a possibility to postpone the submission date of your {name} in the event of illness. Contact your thesis supervisor and your responsible administrator at the examination office to discuss what you're obliged to do in such a case."
+			if name = "master thesis": "I have no information on whether there is a possibility to postpone the submission date of your {name} in the event of illness. Contact your thesis supervisor and your responsible administrator at the examination office to discuss what you're obliged to do in such a case."
+
+template inform_byname(name, contact_registration_problem)
+	if contact_registration_problem = "administrator": "If you have problems registering for any kind of exam, you have to contact your responsible administrator during the registration period."
+
+
+#------------System Confirm--------------#
+
+template confirm(): "In need a bit more information about the examination matters you want to discuss in order to help you."
+
+# ------------System RequestMore--------#
+# System Requestable:
+
+template reqmore(): "Do you need anything else?"
+
+#-----------System Select----------------#
+
+# No available system select actions for this domain

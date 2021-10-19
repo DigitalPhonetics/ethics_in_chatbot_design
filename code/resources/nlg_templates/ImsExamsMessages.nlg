@@ -1,0 +1,152 @@
+
+# ---------------NEW RULES - IMS Exams MESSAGES-------------------------#
+# --------------Templates for System General Acts-----------------------#
+
+template welcomemsg(): "Welcome to the 'IMS Exams' chatbot. On which topic shall information be provided?"
+template welcomemsg(help): "The request could not be processed. Information request must be specified."
+template welcomemsg(more): "Should further information be provided?"
+template bad(): "The request could not be processed. Information request must be specified."
+# repeat(): "Information request must be repeated"
+template closingmsg(): "Session terminated. (Please rate this conversation now)"
+
+#------------------Templates for System Requests------------------------#
+# The only system requestable keyword is "name"
+
+template request(name): "What information should be provided? Information about the following topics can be provided: exams, requirements modules, bachelor theses and master theses."
+
+# --------- Helper Functions -------- #
+
+function plural(name)
+	"{plural_s(name)}"
+
+function cap_name(name)
+	"{cap_name(name)}"
+
+# --------------------Methods for System Informs-------------------------#
+
+#-------------Templates for System Recommendation/Inform---------------#
+
+template inform_byname(name): "What information should be provided about {plural(name)}?"
+	if name = "bachelor thesis": "What information should be provided about bachelor theses?"
+	if name = "master thesis": "What information should be provided about master theses?"
+	if name = "dontcare": "What information should be provided about examination matters?"
+
+template inform_byname(name, registration)
+	if registration = "campus": "{plural_s(cap_name(name))} must be registered on the exam registration website within the registration period for the semester. In order to register, modules and associated courses must be selected via the 'Registration via Curriculum' tab. A repeat {name} taking place in the same semester cannot be registered on the exam registration website. Instead, a form called 'Exam Registration Replacement Form' available at the examination office has to be filled out and handed to the examination office."
+		if name = "requirements module": "{cap_name(name)} examinations must be registered on the exam registration website within the registration period for the semester. In order to register for it, the {name} must be selected via the 'Registration via Curriculum' tab. Examination dates will be announced on the exam registration website after the registration phase ended."
+	if registration = "exam office":
+		if name = "bachelor thesis": "Bachelor theses are registered at the examination office through handing in the filled out application form, available on the exam registration website under the tab 'My Application Forms'."
+		if name = "master thesis": "Master theses are registered at the examination office through handing in the filled out application form, available on the exam registration website under the tab 'My Applications Forms'."
+
+template inform_byname(name, registration_period_sose)
+	if registration_period_sose = "May 6, 2020 to May 28, 2020": "The registration period for {plural_s(name)} for the summer semester 2020 is taking place from May 6 to May 28."
+	if registration_period_sose = "independent":
+		if name = "bachelor thesis": "Bachelor theses can be registered at any time at the examination office. More information can be found in the examination regulation."
+		if name = "master thesis": "Master theses can be registered at any time at the examination office. More information can be found in the examination regulation."
+
+template inform_byname(name, registration_period_wise)
+	if registration_period_wise = "November 11, 2020 to December 3, 2020": "The registration period for {plural_s(name)} for the winter semester 2020 was from November 11 to December 3."
+	if registration_period_sose = "independent":
+		if name = "bachelor thesis": "Bachelor theses can be registered at any time at the examination office. More information can be found in the examination regulation."
+		if name = "master thesis": "Master theses can be registered at any time at the examination office. More information can be found in the examination regulation."
+
+template inform_byname(name, registration, registration_period_sose)
+	if registration = "campus"
+		if registration_period_sose = "May 6, 2020 to May 28, 2020": "The registration period for {plural_s(name)} for the summer semester 2020 is taking place from May 6 to May 28. {plural_s(cap_name(name))} must be registered on the exam registration website within this time frame."
+	if registration = "exam office"
+		if registration_period_sose = "independent":
+			if name = "bachelor thesis": "Bachelor theses can be registered at any time at the examination office through handing in the filled out application form, available on the exam registration website under the tab 'My Application Forms'. More information can be found in the examination regulation."
+			if name = "master thesis": "Master theses can be registered at any time at the examination office through handing in the filled out application form, available on the exam registration website under the tab 'My Application Forms'. More information can be found in the examination regulation."
+
+template inform_byname(name, registration, registration_period_wise)
+	if registration = "campus"
+		if registration_period_wise = "November 11, 2020 to December 3, 2020": "The registration period for {plural_s(name)} for the winter semester 2020 was from November 11 to December 3. {plural_s(cap_name(name))} must have been registered within this time frame."
+	if registration = "exam office"
+		if registration_period_sose = "independent":
+			if name = "bachelor thesis": "Bachelor theses can be registered at any time at the examination office through handing in the filled out application form, available on the exam registration website under the tab 'My Applications'. More information can be found in the examination regulation."
+			if name = "master thesis": "Master theses can be registered at any time at the examination office through handing in the filled out application form, available on the exam registration website under the tab 'My Applications'. More information can be found in the examination regulation."
+
+template inform_byname(name, acceptance_belated_registration)
+	if acceptance_belated_registration = "no": "Belated registrations are not accepted by the examination office. Without an official registration, the {name} cannot be sit and has to be taken in the semester in which it is offered next."
+	if acceptance_belated_registration = "independent":
+		if name = "bachelor thesis": "Bachelor theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+		if name = "master thesis": "Master theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration)
+	if acceptance_belated_registration = "no"
+		if registration = "campus": "Belated {name} registrations are not accepted by the examination office. Without an official registration, the {name} cannot be sit and has to be taken in the semester in which it is offered next."
+	if acceptance_belated_registration = "independent"
+		if name = "bachelor thesis": "Bachelor theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+		if name = "master thesis": "Master theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration_period_wise)
+    if acceptance_belated_registration = "independent"
+        if registration_period_wise = "independent"
+            if name = "bachelor thesis": "Bachelor theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+            if name = "master thesis": "Master theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration, registration_period_wise)
+	if acceptance_belated_registration = "no"
+		if registration = "campus"
+			if registration_period_wise = "November 11, 2020 to December 3, 2020": "Belated {name} registrations are not accepted by the examination office. Without an official registration, the {name} cannot be sit and has to be taken in the semester in which it is offered next."
+	if acceptance_belated_registration = "independent"
+		if registration = "exam office"
+			if registration_period_wise = "independent"
+				if name = "bachelor thesis": "Bachelor theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+				if name = "master thesis": "Master theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+
+template inform_byname(name, acceptance_belated_registration, registration, registration_period_sose)
+	if acceptance_belated_registration = "no"
+		if registration = "campus"
+			if registration_period_sose = "May 6, 2020 to May 28, 2020": "Belated {name} registrations are not accepted by the examination office. Without an official registration, the {name} cannot be sit and has to be taken in the semester in which it is offered next."
+	if acceptance_belated_registration = "independent"
+		if registration = "exam office"
+			if registration_period_sose = "independent"
+				if name = "bachelor thesis": "Bachelor theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+				if name = "master thesis": "Master theses registrations are independent of the examination registration period and can be registered at any time at the examination office."
+
+template inform_byname(name, registration_withdrawal)
+	if registration_withdrawal = "yes": "Registered {plural_s(name)} can be deregistered on the exam registration website until 7 days before the exam."
+		if name = "bachelor thesis": "A {name} topic can be changed once and within the first 3 months of processing."
+		if name = "master thesis": "A {name} topic can be changed once and within the first 3 months of processing."
+
+template inform_byname(name, acceptance_missed_withdrawal)
+	if acceptance_missed_withdrawal = "examination board": "In the event of non-compliance with the withdrawal period, the {name} withdrawal must be approved by the examination board."
+	if acceptance_missed_withdrawal = "n.a.": "Information about missing the withdrawal period is not available. Student advisors and administrators at the examination office can provide more information."
+
+template inform_byname(name, acceptance_missed_withdrawal, registration_withdrawal)
+	if acceptance_missed_withdrawal = "examination board"
+		if registration_withdrawal = "yes": "In the event of non-compliance with the withdrawal period, the {name} withdrawal must be approved by the examination board."
+	if acceptance_missed_withdrawal = "n.a."
+		if registration_withdrawal = "yes"
+			if name = "bachelor thesis": "Information about missing the withdrawal period is not available. Student advisors and administrators at the examination office can provide more information."
+			if name = "master thesis": "Information about missing the withdrawal period is not available. Student advisors and administrators at the examination office can provide more information."
+
+template inform_byname(name, acceptance_illness_withdrawal)
+	if acceptance_illness_withdrawal = "yes": "In the event of illness, a medical certificate stating the inability to take the {name} must be submitted. The original certificate along with a completed withdrawal form must be submitted to the examination office no later than 3 days after the examination took place."
+	if acceptance_illness_withdrawal = "n.a.": "There is no information available on postponing a thesis' date of submission in case of illness. Student advisors and administrators at the examination office can provide more information."
+
+template inform_byname(name, acceptance_illness_withdrawal, registration_withdrawal)
+	if acceptance_illness_withdrawal = "yes"
+		if registration_withdrawal = "yes": "In the event of illness, a medical certificate stating the inability to take the {name} must be submitted. The original certificate along with a completed withdrawal form must be submitted to the examination office no later than 3 days after the examination took place."
+	if acceptance_illness_withdrawal = "n.a."
+		if registration_withdrawal = "yes"
+			if name = "bachelor thesis": "There is no information available on postponing a thesis' date of submission in case of illness. Student advisors and administrators at the examination office can provide more information."
+			if name = "master thesis": "There is no information available on postponing a thesis' date of submission in case of illness. Student advisors and administrators at the examination office can provide more information."
+
+template inform_byname(name, contact_registration_problem)
+	if contact_registration_problem = "administrator": "In case of registration issues, the responsible administrator has to be contacted during the registration period."
+
+
+#------------System Confirm--------------#
+
+template confirm(): "Information request about examination matters must be specified."
+
+# ------------System RequestMore--------#
+# System Requestable:
+
+template reqmore(): "Should further information be provided?"
+
+#-----------System Select----------------#
+
+# No available system select actions for this domain

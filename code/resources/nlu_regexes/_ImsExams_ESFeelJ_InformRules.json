@@ -1,0 +1,9 @@
+{
+    "name": {
+        "bachelor thesis": "(?=(\\bbachelor thesis\\b|bachelor thesis(\\s)?(topic)?|(bachelor('*s?) thesis(\\s)?(topic)?)))|(\\b|^| )((((I have|I'*ve)( got)?( a)? question(s)? about)|(I (need|want) information(s)? about)) (the|my|a(n)?|\\s)?\\s?)((?=(\\bbachelor thesis\\b|bachelor thesis(\\s)?(topic)?|(bachelor('*s?) thesis(\\s)?(topic)?))))",
+        "exam": "(?=(\\bexam\\b|exam(s|ination)?|test(s)?))|(\\b|^| )((((I have|I'*ve)( got)?( a)? question(s)? about)|(I (need|want) information(s)? about)) (the|my|a(n)?|\\s)?\\s?)((?=(\\bexam\\b|exam(s|ination)?|test(s)?)))",
+        "master thesis": "(?=(\\bmaster thesis\\b|master thesis(\\s)?(topic)?|(master('*s?) thesis(\\s)?(topic)?)))|(\\b|^| )((((I have|I'*ve)( got)?( a)? question(s)? about)|(I (need|want) information(s)? about)) (the|my|a(n)?|\\s)?\\s?)((?=(\\bmaster thesis\\b|master thesis(\\s)?(topic)?|(master('*s?) thesis(\\s)?(topic)?))))",
+        "repeat exam": "(?=(\\brepeat exam\\b|repeat (exam(s|ination)?|test(s)?)))|(\\b|^| )((((I have|I'*ve)( got)?( a)? question(s)? about)|(I (need|want) information(s)? about)) (the|my|a(n)?|\\s)?\\s?)((?=(\\brepeat exam\\b|repeat (exam(s|ination)?|test(s)?))))",
+        "requirements module": "(?=(\\brequirements module\\b|requirement(s)? module(s)?))|(\\b|^| )((((I have|I'*ve)( got)?( a)? question(s)? about)|(I (need|want) information(s)? about)) (the|my|a(n)?|\\s)?\\s?)((?=(\\brequirements module\\b|requirement(s)? module(s)?)))"
+    }
+}

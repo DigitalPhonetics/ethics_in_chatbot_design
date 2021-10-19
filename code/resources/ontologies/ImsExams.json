@@ -1,0 +1,41 @@
+{
+    "discourseAct": [
+        "ack",
+        "hello",
+        "none",
+        "silence",
+        "thanks",
+        "bad"
+    ],
+    "informable": {
+        "name": [
+            "bachelor thesis",
+            "master thesis",
+            "repeat exam",
+            "requirements module"
+        ]
+    },
+    "key": "name",
+    "keyword": "exam",
+    "method": [
+        "none",
+        "byconstraints",
+        "byprimarykey",
+        "finished",
+        "byalternatives",
+        "restart"
+    ],
+    "requestable": [
+        "registration",
+        "registration_period_sose",
+        "registration_period_wise",
+        "acceptance_belated_registration",
+        "registration_withdrawal",
+        "acceptance_missed_withdrawal",
+        "acceptance_illness_withdrawal",
+        "contact_registration_problem"
+    ],
+    "system_requestable": [
+        "name"
+    ]
+}
